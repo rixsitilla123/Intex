@@ -8,7 +8,7 @@ let elNavList = document.querySelector(".nav-list")
 let elItem1 = document.querySelector(".item1")
 let elItem2 = document.querySelector(".item2")
 
-elNavList.addEventListener("click", function(evt){
+elNavList.addEventListener("click", function(evt){ 
     if(evt.target.id){
         if(evt.target.id == 0){
             elItem1.classList.add("text-teal-500")
@@ -29,9 +29,9 @@ elAddButton.addEventListener("click", function(){
         <form class="add-form">
             <label>
                 <div class="w-[80%] bg-white mx-auto">
-                    <img class="rounded-[50px]" src="./images/modal-choose-img.png" alt="" width="100%" height="100%"/>
+                    <img class="rounded-[50px] h-[250px] render-img" src="./images/modal-choose-img.png" alt="" width="100%" height="100%"/>
                 </div>
-                <input class="visually-hidden" type="file"/>
+                <input class="visually-hidden get-img" type="file"/>
             </label>
             <div class="p-3 bg-white mt-5 flex justify-between">
                 <div class="w-[49%] flex flex-col gap-5">
@@ -102,6 +102,12 @@ elAddButton.addEventListener("click", function(){
     `
 
     let elForm = document.querySelector(".add-form")
+    let elInputChange = document.querySelector(".get-img")
+    let elRenderImg = document.querySelector(".render-img")
+
+    elInputChange.addEventListener("change", function(evt){
+        elRenderImg.src = URL.createObjectURL(evt.target.files[0])
+    })
 
     elForm.addEventListener("submit", function(evt){
         evt.preventDefault()
@@ -144,6 +150,7 @@ function renderProducts(arr, list, id){
                     <td class="text-center p-1 bg-slate-300 rounded-l-[20px]">
                         <img class="mx-auto" src=${item.img} alt="Render img" width="40" height="40"/>
                     </td>
+                    <td class="text-center p-1 bg-slate-300 text-[20px]">${item.name}</td> 
                     <td class="text-center p-1 bg-slate-300 flex flex-col">
                         <del class="text-[13px]">${item.oldPrice}</del>       
                         <strong class="text-[18px] line-throw">${item.newPrice}</strong>
